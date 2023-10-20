@@ -1,113 +1,284 @@
-import Image from 'next/image'
+"use client";
+import CardArray from "@/components/CardArray";
+import WinModal from "@/components/modals/WinModal";
+import useTimer from "@/hooks/useTimer";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+interface item {
+  id: string | number;
+  value: number | string;
+  flipped?: boolean;
+  color?: string;
 }
+type language = "es" | "en" | "it" | "de";
+type mode = 2 | 4 | 6 | 8;
+
+const colors = {
+  Charcoal: "#264653",
+  PersianGreen: "#2a9d8f",
+  Saffron: "#e9c46a",
+  SandyBrown: "#f4a261",
+  BurntSienna: "#e76f51",
+};
+const ramdomizeMatriz = ({
+  array,
+  cant,
+}: {
+  array: Array<string>;
+  cant: number;
+}) => {
+  //cant is number of item per row
+  const middle = Math.floor(cant ** 2 / 2);
+  console.log("middl2 " + middle);
+  const rows = cant;
+  const columns = cant;
+  const matrix: item[][] = [];
+  let counter = 0;
+  let counter2 = 0;
+  for (let x = 0; x < rows; x++) {
+    let row: item[] = [];
+    for (let y = 0; y < columns; y++) {
+      const color =
+        Object.values(colors)[
+          Math.floor(Math.random() * Object.values(colors).length)
+        ];
+      if (counter >= middle) {
+        row.push({
+          id: "d" + Number(counter2 + 1),
+          value: array[counter2],
+          flipped: false,
+          color: color,
+        });
+        counter2++;
+      } else {
+        row.push({
+          id: counter + 1,
+          value: array[counter],
+          flipped: false,
+          color: color,
+        });
+        counter++;
+      }
+    }
+
+    matrix.push(row);
+  }
+  console.log(matrix);
+  //randomize
+  for (let x = 0; x < rows; x++) {
+    for (let y = 0; y < columns; y++) {
+      const randomX = Math.floor(Math.random() * rows);
+      const randomY = Math.floor(Math.random() * columns);
+      const temp = matrix[x][y];
+      matrix[x][y] = matrix[randomX][randomY];
+      matrix[randomX][randomY] = temp;
+    }
+  }
+
+  return matrix;
+};
+
+const Game = () => {
+  const [mode, setMode] = useState<mode>(4);
+  const [language, setLanguage] = useState<language>("en");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [win, setWin] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const nOfWords = Math.floor(mode ** 2 / 2);
+    const getData = async () => {
+      const data = await fetch(
+        `https://random-word-api.herokuapp.com/word?lang=${language}&number=${nOfWords}`
+      );
+      const res = await data.json();
+      // console.log(res);
+      setData(res);
+      setLoading(false);
+    };
+    getData();
+  }, [mode, language]);
+
+  useEffect(() => {
+    const winModal = document.getElementById("winModal");
+    if (winModal) {
+      // Verificar si el elemento existe antes de acceder a él
+      if (win) {
+        winModal.classList.remove("hidden");
+      } else {
+        winModal.classList.add("hidden");
+      }
+    }
+  }, [win]);
+
+  console.log("se renderiza padre");
+  return (
+    <div className="flex flex-col justify-center items-center gap-4  bg-gradient-to-r from-black via-gray-900 to-black w-full min-h-screen">
+      <h1 className=" text-slate-200 text-3xl font-bold text-center">
+        Puzzle verse
+      </h1>
+      <h2 className=" text-slate-200 text-tiny font-bold text-center">
+        You have to match the words, complete the game to win.
+      </h2>
+      <GridSelector mode={mode} setMode={(mode) => setMode(mode)} />
+
+      <LanguageSelector language={language} setLanguage={setLanguage} />
+
+      {/* <Timer /> */}
+      <CardArray
+        items={ramdomizeMatriz({ array: data, cant: mode })}
+        loading={loading}
+        win={() => setWin(true)}
+      />
+      <WinModal
+        handlePlayAgain={() => {
+          setWin(false);
+          setMode(mode);
+        }}
+      />
+    </div>
+  );
+};
+
+export default Game;
+
+const GridSelector = ({
+  mode,
+  setMode,
+}: {
+  mode: mode;
+  setMode: (mode: mode) => void;
+}) => (
+  <div className="flex flex-row justify-center items-center gap-2">
+    <button
+      className={
+        "bg-blue-500 text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110" +
+        (mode === 2 ? " bg-blue-900 animate-pulse" : "")
+      }
+      onClick={() => setMode(2)}
+    >
+      2x2
+    </button>
+    <button
+      className={
+        "bg-blue-500 text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110" +
+        (mode === 4 ? " bg-blue-900 animate-pulse" : "")
+      }
+      onClick={() => setMode(4)}
+    >
+      4x4
+    </button>
+    <button
+      className={
+        "bg-blue-500 text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110" +
+        (mode === 6 ? " bg-blue-900 animate-pulse" : "")
+      }
+      onClick={() => setMode(6)}
+    >
+      6x6
+    </button>
+    <button
+      className={
+        "bg-blue-500 text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110" +
+        (mode === 8 ? " bg-blue-900 animate-pulse" : "")
+      }
+      onClick={() => setMode(8)}
+    >
+      8x8
+    </button>
+  </div>
+);
+
+const LanguageSelector = ({
+  language,
+  setLanguage,
+}: {
+  language: language;
+  setLanguage: (language: language) => void;
+}) => (
+  <div
+    id="language"
+    className="flex flex-row justify-center items-center gap-2"
+  >
+    <button
+      className={
+        "bg-zinc-700 text-sm text-zinc-100 font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-zinc-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110 " +
+        (language === "en" ? "bg-zinc-900 animate-pulse" : "")
+      }
+      onClick={() => setLanguage("en")}
+    >
+      English 🍔
+    </button>
+    <button
+      className={
+        "bg-zinc-700 text-sm text-zinc-100 font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-zinc-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110 " +
+        (language === "es" ? "bg-zinc-500 animate-pulse" : "")
+      }
+      onClick={() => setLanguage("es")}
+    >
+      Spanish ☕
+    </button>
+    <button
+      className={
+        "bg-zinc-700 text-sm text-zinc-100 font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-zinc-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110 " +
+        (language === "it" ? "bg-zinc-500 animate-pulse" : "")
+      }
+      onClick={() => setLanguage("it")}
+    >
+      Italian 🍕
+    </button>
+    <button
+      className={
+        "bg-zinc-700 text-sm text-zinc-100 font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-zinc-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110 " +
+        (language === "de" ? "bg-zinc-500 animate-pulse" : "")
+      }
+      onClick={() => setLanguage("de")}
+    >
+      German 🍺
+    </button>
+  </div>
+);
+const Timer = ({
+  handleStart,
+  handleStop,
+  handleRestart,
+}: {
+  handleStart: () => void;
+  handleStop: () => void;
+  handleRestart: () => void;
+}) => {
+  const { seconds, start, stop, restart } = useTimer(1000, 0);
+  return (
+    <div className="flex flex-row justify-center items-center gap-2">
+      <span className=" text-slate-200 text-3xl font-bold text-center mr-4">
+        {seconds}
+      </span>
+      <button
+        className="bg-green-500 text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-green-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+        onClick={() => {
+          start();
+        }}
+      >
+        Play
+      </button>
+      <button
+        className="bg-blue-500 text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+        onClick={() => {
+          stop();
+        }}
+      >
+        Stop
+      </button>
+      <button
+        className="bg-red-500 text-white font-bold px-4 py-2 rounded-lg shadow-lg hover:bg-red-600 transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+        onClick={() => {
+          restart();
+        }}
+      >
+        Restart
+      </button>
+    </div>
+  );
+};

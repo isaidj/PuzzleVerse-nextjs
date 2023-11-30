@@ -1,6 +1,7 @@
 # PuzzleVerse - Word Matching Game
 <img src="preview.png" alt="drawing" width="500"/>
-Welcome to PuzzleVerse, the exciting word matching game that will keep you entertained for hours! Match identical words, change languages, customize matrix size, and explore a variety of words fetched from an [API](https://random-word-api.herokuapp.com/home)
+Welcome to PuzzleVerse, the exciting word matching game!.
+Match identical words, change languages, customize matrix size, and explore a variety of words fetched from an [API](https://random-word-api.herokuapp.com/home)
 
 ## Installation Guide
 
